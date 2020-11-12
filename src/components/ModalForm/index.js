@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Form, Input, InputNumber } from 'antd';
+import { Modal, Form, Input, InputNumber, Select, Option } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import ModalContent from '../ModalContent'
 
@@ -68,9 +68,19 @@ const CollectionCreateForm = (values) => {
                     <InputNumber min={0} max={150} onChange={handleAgeInputChange} />
                 </Form.Item>
                 <Form.Item label="负责人" name="principal" onClick={handleClickOpenModal} >
-                    {/* {principalValue} */}
-                    <Input value={principalValue} suffix={<EllipsisOutlined />} />
+                    <Input value={principalValue} placeholder={principalValue} suffix={<EllipsisOutlined />} />
                 </Form.Item>
+                {/* <Form.Item label="负责人" name="principal">
+                    <Select
+                        labelInValue
+                        value={principalValue}
+                        placeholder={principalValue}
+                        onClick={handleClickOpenModal}
+                        // onChange={this.handleChange}
+                        suffixIcon={<EllipsisOutlined />}
+                    >
+                    </Select>
+                </Form.Item> */}
             </Form>
         </Modal>
     );
