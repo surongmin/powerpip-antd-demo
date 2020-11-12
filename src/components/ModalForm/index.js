@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Form, Input, Radio, InputNumber } from 'antd';
-import { EllipsisOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { Modal, Form, Input, InputNumber } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
 import ModalContent from '../ModalContent'
 
 const formItemLayout = {
@@ -55,7 +55,7 @@ const CollectionCreateForm = (values) => {
                     code: codeInputValue,
                     name: nameInputValue,
                     age: ageInputValue,
-                    principal: principalValue
+                    // principal: principalValue
                 }}
             >
                 <Form.Item label="编号" name="code">
@@ -67,8 +67,9 @@ const CollectionCreateForm = (values) => {
                 <Form.Item label="年龄" name="age">
                     <InputNumber min={0} max={150} onChange={handleAgeInputChange} />
                 </Form.Item>
-                <Form.Item label="负责人" name="principal" onClick={handleClickOpenModal}  >
-                    <Input suffix={<EllipsisOutlined />} />
+                <Form.Item label="负责人" name="principal" onClick={handleClickOpenModal} >
+                    {/* {principalValue} */}
+                    <Input value={principalValue} suffix={<EllipsisOutlined />} />
                 </Form.Item>
             </Form>
         </Modal>
@@ -121,7 +122,6 @@ class ModalForm extends Component {
     handleAgeInputChange = (value) => {
         this.setState({
             ageInputValue: value,
-            principalValue: "principal",
         })
     }
 
@@ -137,9 +137,14 @@ class ModalForm extends Component {
             childvisible: false,
             principalValue: principal,
         })
-        this.handleChangePrincipal(principal)
         console.log(this.state.principalValue)
     }
+
+    // componentDidUpdate() {
+    //     this.setState({
+    //         principalValue: this.state.principal,
+    //     })
+    // }
 
     render() {
         const { visible, childvisible } = this.state

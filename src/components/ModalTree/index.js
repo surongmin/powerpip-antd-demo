@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { Row, Col, Tree, Space, Table } from 'antd';
 import { FolderOpenOutlined, FileOutlined, FormOutlined } from '@ant-design/icons';
 
-// 临时样式
-const style = { background: '#0092ff', padding: '8px 0' };
-
 // tree的数据
 const treeData = [
     {
@@ -258,7 +255,7 @@ const ModalTree = (props) => {
             key: 'action',
             render: () => (
                 <Space size="middle">
-                    <a onClick={handleDeleteSelect}>Delete</a>
+                    <a href='#' onClick={handleDeleteSelect}>Delete</a>
                 </Space>
             )
         }

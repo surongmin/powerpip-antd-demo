@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Modal, Button } from 'antd';
 import ModalTree from '../ModalTree'
 
-const style = { background: '#0092ff', padding: '8px 0' };
 class ModalContent extends Component {
   constructor(props) {
     super(props)
