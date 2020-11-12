@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Row, Col, Tree, Space, Table } from 'antd';
+import { Row, Col, Tree, Space, Table, Button } from 'antd';
 import { FolderOpenOutlined, FileOutlined, FormOutlined } from '@ant-design/icons';
 
 // tree的数据
-const treeData = [
+const projectTreeData = [
     {
         title: '上海普华科技',
         key: '0-0',
@@ -110,6 +110,113 @@ const treeData = [
     },
 ];
 
+const departmentTreeData = [
+    {
+        title: '上海普华科技',
+        key: '0-0',
+        icon: <FolderOpenOutlined />,
+        children: [
+            {
+                title: '研发部',
+                key: '0-0-0',
+                icon: <FolderOpenOutlined />,
+                children: [
+                    {
+                        title: '前端',
+                        key: '0-0-0-0',
+                        icon: <FileOutlined />,
+                    },
+                    {
+                        title: '后端',
+                        key: '0-0-0-1',
+                        icon: <FileOutlined />,
+                    },
+                    {
+                        title: '测试',
+                        key: '0-0-0-2',
+                        icon: <FileOutlined />,
+                    },
+                ],
+            },
+            {
+                title: 'PowerPIP',
+                key: '0-0-1',
+                icon: <FolderOpenOutlined />,
+                children: [
+                    {
+                        title: '前端',
+                        key: '0-0-1-0',
+                        icon: <FileOutlined />,
+                    },
+                    {
+                        title: '后端',
+                        key: '0-0-1-1',
+                        icon: <FileOutlined />,
+                    },
+                    {
+                        title: '安卓',
+                        key: '0-0-1-2',
+                        icon: <FileOutlined />,
+                    },
+                ],
+            },
+            {
+                title: '市场部',
+                key: '0-0-2',
+                icon: <FolderOpenOutlined />,
+                children: [
+                    {
+                        title: '市场部1',
+                        key: '0-0-2-0',
+                        icon: <FileOutlined />,
+                    },
+                    {
+                        title: '市场部2',
+                        key: '0-0-2-1',
+                        icon: <FormOutlined />,
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        title: '杭州普华',
+        key: '0-1',
+        icon: <FolderOpenOutlined />,
+        children: [
+            {
+                title: '研发部',
+                key: '0-1-0',
+                icon: <FolderOpenOutlined />,
+                children: [
+                    {
+                        title: '测试',
+                        key: '0-1-0-0',
+                        icon: <FolderOpenOutlined />,
+                        children: [
+                            {
+                                title: '前端测试',
+                                key: '0-1-0-0-0',
+                                icon: <FileOutlined />,
+                            },
+                            {
+                                title: '接口测试',
+                                key: '0-1-0-0-1',
+                                icon: <FileOutlined />,
+                            },
+                        ],
+                    },
+                    {
+                        title: '开发',
+                        key: '0-1-0-1',
+                        icon: <FileOutlined />,
+                    },
+                ],
+            },
+        ],
+    },
+];
+
 // 中间Table的表格字段
 const columns = [
     {
@@ -134,7 +241,7 @@ const columns = [
 ];
 
 // 中间Table的数据
-const dataTable = [
+const projectDataTable = [
     {
         treeId: '0-0',
         data: []
@@ -206,7 +313,81 @@ const dataTable = [
 
 ];
 
+const departmentDataTable = [
+    {
+        treeId: '0-0',
+        data: []
+    },
+    {
+        treeId: '0-0-0',
+        data: []
+    },
+    {
+        treeId: '0-0-0-0',
+        data: [
+            {
+                key: '1',
+                code: 'liming',
+                name: '李明',
+            },
+            {
+                key: '2',
+                code: 'liming1',
+                name: '李明1',
+            },
+            {
+                key: '3',
+                code: 'liming2',
+                name: '李明2',
+            },
+        ]
+    },
+    {
+        treeId: '0-0-0-1',
+        data: [
+            {
+                key: '1',
+                code: 'liuzhi',
+                name: '刘志',
+            },
+            {
+                key: '2',
+                code: 'liuzhi1',
+                name: '刘志1',
+            },
+            {
+                key: '3',
+                code: 'liuzhi2',
+                name: '刘志2',
+            },
+        ]
+    },
+    {
+        treeId: '0-0-0-2',
+        data: [
+            {
+                key: '1',
+                code: 'ceshi',
+                name: '测试',
+            },
+            {
+                key: '2',
+                code: 'ceshi1',
+                name: '测试1',
+            },
+            {
+                key: '3',
+                code: 'ceshi2',
+                name: '测试2',
+            },
+        ]
+    },
+
+];
+
 const ModalTree = (props) => {
+    const [treeData, setTreeData] = useState(projectTreeData)
+    const [dataTable, setDataTable] = useState(projectDataTable)
     const [data, setData] = useState([])
     const [hasData, setHasData] = useState(false)
     const [dataSelect, setdataSelect] = useState([{
@@ -214,6 +395,8 @@ const ModalTree = (props) => {
         code: '',
         name: '',
     }])
+    const [projectButton, setProjectButton] = useState('primary')
+    const [departmentButton, setDepartmentButton] = useState('default')
 
     // tree的代码
     const showLine = {
@@ -234,6 +417,20 @@ const ModalTree = (props) => {
             setData([])
         }
     };
+
+    const handleProjectClick = () => {
+        setProjectButton('primary');
+        setDepartmentButton('default')
+        setTreeData(projectTreeData)
+        setDataTable(projectDataTable)
+    }
+
+    const handleDepartmentClick = () => {
+        setProjectButton('default');
+        setDepartmentButton('primary')
+        setTreeData(departmentTreeData)
+        setDataTable(departmentDataTable)
+    }
 
     // 中间表格的代码
 
@@ -270,6 +467,10 @@ const ModalTree = (props) => {
     return (
         <Row gutter={16}>
             <Col className="gutter-row" span={6}>
+                <div>
+                    <Button type={projectButton} onClick={handleProjectClick} style={{ margin: '10px' }}>按项目</Button>
+                    <Button type={departmentButton} onClick={handleDepartmentClick} >按部门</Button>
+                </div>
                 <Tree
                     style={{ border: '1px solid #eeeeee', padding: '10px' }}
                     showLine={showLine}

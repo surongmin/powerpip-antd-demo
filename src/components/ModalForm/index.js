@@ -70,17 +70,6 @@ const CollectionCreateForm = (values) => {
                 <Form.Item label="负责人" name="principal" onClick={handleClickOpenModal} >
                     <Input value={principalValue} placeholder={principalValue} suffix={<EllipsisOutlined />} />
                 </Form.Item>
-                {/* <Form.Item label="负责人" name="principal">
-                    <Select
-                        labelInValue
-                        value={principalValue}
-                        placeholder={principalValue}
-                        onClick={handleClickOpenModal}
-                        // onChange={this.handleChange}
-                        suffixIcon={<EllipsisOutlined />}
-                    >
-                    </Select>
-                </Form.Item> */}
             </Form>
         </Modal>
     );
